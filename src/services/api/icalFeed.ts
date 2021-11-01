@@ -1,0 +1,32 @@
+import {http} from './http'
+import {IcalFeedValues} from 'src/types'
+
+export async function getIcalFeedsApi(propertyId: number) {
+  const {data} = await http.get(`/api/v1/property/${propertyId}/ical_feeds`)
+
+  return data
+}
+
+export async function addIcalFeedApi(
+  icalFeed: IcalFeedValues,
+  propertyId: number,
+) {
+  const {data} = await http.post(
+    `/api/v1/property/${propertyId}/ical_feed`,
+    icalFeed,
+  )
+
+  return data
+}
+
+export async function updateIcalFeedApi(icalFeed: IcalFeedValues) {
+  const {data} = await http.put(`/api/v1/ical_feed/${icalFeed.id}`, icalFeed)
+
+  return data
+}
+
+export async function deleteIcalFeedApi(id: number) {
+  const data = await http.delete(`/api/v1/ical_feed/${id}`)
+
+  return data
+}
